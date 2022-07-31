@@ -160,49 +160,34 @@ The assert statement is used for comparing the current state value to the expect
 
 The following error's are observed:
 
-**Error 1**
+**Error message**
 ```
-test12_basic_mux failed
+test_seq_bug failed
 Traceback (most recent call last):
-File "/workspace/challenges-inderjit303/level1_design1/test_mux.py", line 236, in test12_basic_mux
-assert dut.out.value == Inp12, f"Muliplexer output is incorrect: {dut.sel.value} != 12"
-AssertionError: Muliplexer output is incorrect: 01100 != 12
-```
-
-**Error 2**
-```
-test30_basic_mux failed
-Traceback (most recent call last):
-File "/workspace/challenges-inderjit303/level1_design1/test_mux.py", line 560, in test30_basic_mux
-assert dut.out.value == Inp30, f"Muliplexer output is incorrect: {dut.sel.value} != 30"
-AssertionError: Muliplexer output is incorrect: 11110 != 30
+File "/workspace/challenges-inderjit303/level1_design2/test_seq_detect_1011.py", line 78, in test_seq_bug
+assert dut.current_state.value == dut.SEQ_1011.value, f"Sequence must be detected but is not detected {dut.current_state.value}!= {dut.SEQ_1011.value}"
+AssertionError: Sequence must be detected but is not detected 000!= 4
 ```
 
 ## Test Scenario **(Level 1 Design 2)**
-Cocotb tests are created for testing all states of input and monitoring outputs purposes. This makes sure that all the inputs are compared with expected output and DUT output. 
+Cocotb tests are created for testing all states of input and monitoring outputs purposes. This makes sure that the input sequence are compared with expected output and DUT output.
 
 ![l1d2_image6](https://user-images.githubusercontent.com/99788755/182026718-6ac98353-878a-428b-8665-33856b524d75.png)
 
 
-The following cases reveals incorrect outputs for 2 such inputs cases: 
+The following cases reveals incorrect outputs for following input sequence cases: 
 
-Case 1: 
-- Test inputs: Inp12 = 1 and SEL = 12
-- Expected Output: out = 12
-- Observed Output in the DUT dut.out.value != Inp12 != 12
+- Test input sequence: *1101111*
+- Expected Output: seq_seen = 1 or dut.SEQ_1011.value = 4
+- Observed Output in the DUT i.e Sequence must be detected but is not detected if dut.current_state.value != dut.SEQ_1011.value 
 
-Case 2: 
-- Test inputs: Inp12 = 1 and SEL = 30
-- Expected Output: out = 30
-- Observed Output in the DUT dut.out.value != Inp30 != 30
-
-Output mismatches for the above inputs proving that there is a **design bug in Level 1 Design 1**
+Output mismatches for the above inputs proving that there is a **design bug in Level 1 Design 2**
 
 ![l1d2_image5](https://user-images.githubusercontent.com/99788755/182026652-191b1c45-40bd-4cbc-8d2e-4272d4ee6758.png)
 
 
 ## Design Bug (Level 1 Design 2)
-Based on the above test input and analysing the design, two bugs in the code were detected as discussed below: 
+Based on the above test input and analysing the design, one bug in the code was detected as discussed below: 
 
 ```
 5'b01101: out = inp12;     ====> BUG 1
