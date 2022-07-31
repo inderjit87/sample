@@ -187,23 +187,19 @@ Output mismatches for the above inputs proving that there is a **design bug in L
 
 
 ## Design Bug (Level 1 Design 2)
-Based on the above test input and analysing the design, one bug in the code was detected as discussed below: 
+Based on the above test input and analysing the design, the following bugs in the code are detected as discussed below: 
 
 ```
-5'b01101: out = inp12;     ====> BUG 1
-5'b01101: out = inp13;
-5'b01110: out = inp14;            
+SEQ_1:
+   begin
+      if(inp_bit == 1)
+        next_state = IDLE;   ====> BUG 1
+      else
+        next_state = SEQ_10;   ====> BUG 2
+    end
 ```
 
-For the mux design, the logic should be '5'b01100: out = inp12' instead of '5'b01101: out = inp12' as in the design code.
-
-```
-5'b11100: out = inp28;
-5'b11101: out = inp29;
-default: out = 0;          ====> BUG 2
-```
-
-For the mux design, the logic should be '5'b11110: out = inp30' instead of 'default: out = 0' as in the design code.
+For the sequence detector design, IDLE and SEQ_10 should be interchanged in the design code. 
 
 
 ## Design Fix (Level 1 Design 2)
@@ -212,29 +208,31 @@ Updating the verilog design code and re-running the test makes the test pass.
 ![l1d2_image7](https://user-images.githubusercontent.com/99788755/182026727-cd48515e-366c-4ccc-b2cb-34490df96dd9.png)
 
 
-The updated design is updated in the folder 'fixed_level1_design1'
+The updated design is updated in the folder 'fixed_level1_design2'
 
 ## Verification Strategy (Level 1 Design 2)
-As explained in test scenarios above, bug free verilog code is updated in folder named 'fixed_level1_design1'
+As explained in test scenarios above, bug free verilog code is updated in folder named 'fixed_level1_design2'
 The following bugs were detected and corrected.
 
-Case 1: 
-- Test inputs: Inp12 = 1 and SEL = 12
-- Expected Output: out = 12
-- Observed Output in the DUT dut.out.value = Inp12 = 12
+```
+SEQ_1:
+   begin
+     if(inp_bit == 1)
+       next_state = SEQ_10;
+       // this statement causes bug in the code
+     else
+       next_state = IDLE;
+       // this statement causes bug in the code
+    end
+```
 
-Case 2: 
-- Test inputs: Inp12 = 1 and SEL = 30
-- Expected Output: out = 30
-- Observed Output in the DUT dut.out.value = Inp30 = 30
-
-Output matches for the above inputs proving that **Level 1 Design 2 is bug free**
+Sequence 1011 is detected proving that **Level 1 Design 2 is bug free**
 
 ![l1d2_image8](https://user-images.githubusercontent.com/99788755/182026698-6d8e7a17-a4c0-4ee2-9fd7-3765f61d81de.png)
 
 
 ## Is the verification complete ?   (Level 1 Design 2)
-Yes, the bugs were detected using cocotb testbench verification on level1_design1 MUX code. 
+Yes, the bugs were detected using cocotb testbench verification on level1_design2 Sequence detector code. 
 The bugs were located in code and eliminated.
-Hence, the verification of Mux Level 1 Design 1 completed by Pass DUT test. 
+Hence, the verification of Sequence Detector Level 1 Design 2 completed by Pass DUT test. 
 
