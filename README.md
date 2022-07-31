@@ -105,7 +105,7 @@ Updating the verilog design code and re-running the test makes the test pass.
 The updated design is updated in the folder 'fixed_level1_design1'
 
 ## Verification Strategy (Level 1 Design 1)
-As explained in test scenarios above, bug free verilog code is updated in folder named 'fixed_level1_design1'
+As explained in test scenarios above, bug free verilog code is updated in folder named **fixed_level1_design1**.
 The following bugs were detected and corrected.
 
 Case 1: 
@@ -211,7 +211,7 @@ Updating the verilog design code and re-running the test makes the test pass.
 The updated design is updated in the folder 'fixed_level1_design2'
 
 ## Verification Strategy (Level 1 Design 2)
-As explained in test scenarios above, bug free verilog code is updated in folder named 'fixed_level1_design2'
+As explained in test scenarios above, bug free verilog code is updated in folder named **fixed_level1_design2**.
 The following bugs were detected and corrected.
 
 ```
