@@ -232,7 +232,7 @@ Sequence 1011 is detected proving that **Level 1 Design 2 is bug free**
 
 
 ## Is the verification complete ?   (Level 1 Design 2)
-Yes, the bugs were detected using cocotb testbench verification on level1_design2 Sequence detector code. 
-The bugs were located in code and eliminated.
-Hence, the verification of Sequence Detector Level 1 Design 2 completed by Pass DUT test. 
+Yes, the bugs were detected using cocotb testbench on level1_design2 Sequence detector code. 
+The bugs were located and rectified. The same Cocotb test which detected the bugs, now with modified changes in the code, passes without committing any errors.
+Hence, the verification of Sequence Detector Level 1 Design 2 is complete.  
 
