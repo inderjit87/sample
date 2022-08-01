@@ -80,7 +80,7 @@ def run_test_2(dut):
 
     # reset
     dut.RST_N.value <= 0
-    yield Timer(20) 
+    yield Timer(10) 
     dut.RST_N.value <= 1
 
     ######### CTB : Test 2 to expose the bug #############
@@ -100,7 +100,7 @@ def run_test_2(dut):
     dut.EN_mav_putvalue.value = 1
     dut.mav_putvalue_instr.value = mav_putvalue_instr
   
-    yield Timer(21) 
+    yield Timer(1) 
 
     # obtaining the output
     dut_output = dut.mav_putvalue.value
