@@ -32,7 +32,7 @@ def run_test(dut):
     yield Timer(10) 
     dut.RST_N.value <= 1
 
-    ######### CTB : Modify the test to expose the bug #############
+    ######### CTB : Test to expose the bug #############
     # input transaction
     mav_putvalue_src1 = 0x5
     mav_putvalue_src2 = 0x0
